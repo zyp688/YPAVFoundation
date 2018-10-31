@@ -1,0 +1,668 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		266B3A3321894A09001AA0D9 /* shamoluotuo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */; };
+		266B3A3621894A31001AA0D9 /* YPAudioPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */; };
+		268556FE2186E1BB00114905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 268556FD2186E1BB00114905 /* AppDelegate.m */; };
+		268557012186E1BB00114905 /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 268557002186E1BB00114905 /* RootVC.m */; };
+		268557042186E1BB00114905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268557022186E1BB00114905 /* Main.storyboard */; };
+		268557062186E1BC00114905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 268557052186E1BC00114905 /* Assets.xcassets */; };
+		268557092186E1BC00114905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268557072186E1BC00114905 /* LaunchScreen.storyboard */; };
+		2685570C2186E1BC00114905 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2685570B2186E1BC00114905 /* main.m */; };
+		268557162186E1BC00114905 /* YPAVFundationDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268557152186E1BC00114905 /* YPAVFundationDemoTests.m */; };
+		268557212186E1BC00114905 /* YPAVFundationDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268557202186E1BC00114905 /* YPAVFundationDemoUITests.m */; };
+		268557392186F4D700114905 /* YPBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 268557382186F4D700114905 /* YPBaseVC.m */; };
+		268557412187032400114905 /* YPAVAudioPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2685573E2187032400114905 /* YPAVAudioPlayerVC.m */; };
+		268557422187032400114905 /* YPAVAudioPlayerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2685573F2187032400114905 /* YPAVAudioPlayerVC.xib */; };
+		26CBDFB821899107000617BC /* shamoluotuoicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 26CBDFB721899107000617BC /* shamoluotuoicon.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		268557122186E1BC00114905 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 268556F12186E1BB00114905 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 268556F82186E1BB00114905;
+			remoteInfo = YPAVFundationDemo;
+		};
+		2685571D2186E1BC00114905 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 268556F12186E1BB00114905 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 268556F82186E1BB00114905;
+			remoteInfo = YPAVFundationDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shamoluotuo.mp3; sourceTree = "<group>"; };
+		266B3A3421894A31001AA0D9 /* YPAudioPlayerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPAudioPlayerModel.h; sourceTree = "<group>"; };
+		266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAudioPlayerModel.m; sourceTree = "<group>"; };
+		268556F92186E1BB00114905 /* YPAVFundationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YPAVFundationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		268556FC2186E1BB00114905 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		268556FD2186E1BB00114905 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		268556FF2186E1BB00114905 /* RootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootVC.h; sourceTree = "<group>"; };
+		268557002186E1BB00114905 /* RootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootVC.m; sourceTree = "<group>"; };
+		268557032186E1BB00114905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		268557052186E1BC00114905 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		268557082186E1BC00114905 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2685570A2186E1BC00114905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2685570B2186E1BC00114905 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		268557112186E1BC00114905 /* YPAVFundationDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YPAVFundationDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		268557152186E1BC00114905 /* YPAVFundationDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAVFundationDemoTests.m; sourceTree = "<group>"; };
+		268557172186E1BC00114905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2685571C2186E1BC00114905 /* YPAVFundationDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YPAVFundationDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		268557202186E1BC00114905 /* YPAVFundationDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAVFundationDemoUITests.m; sourceTree = "<group>"; };
+		268557222186E1BD00114905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2685572E2186E37D00114905 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
+		2685572F2186EB0200114905 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		268557372186F4D700114905 /* YPBaseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPBaseVC.h; sourceTree = "<group>"; };
+		268557382186F4D700114905 /* YPBaseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPBaseVC.m; sourceTree = "<group>"; };
+		2685573D2187032400114905 /* YPAVAudioPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YPAVAudioPlayerVC.h; sourceTree = "<group>"; };
+		2685573E2187032400114905 /* YPAVAudioPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YPAVAudioPlayerVC.m; sourceTree = "<group>"; };
+		2685573F2187032400114905 /* YPAVAudioPlayerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YPAVAudioPlayerVC.xib; sourceTree = "<group>"; };
+		26CBDFB721899107000617BC /* shamoluotuoicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shamoluotuoicon.jpg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		268556F62186E1BB00114905 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2685570E2186E1BC00114905 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		268557192186E1BC00114905 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		266B3A3121894A01001AA0D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				26CBDFB721899107000617BC /* shamoluotuoicon.jpg */,
+				266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		268556F02186E1BB00114905 = {
+			isa = PBXGroup;
+			children = (
+				268556FB2186E1BB00114905 /* YPAVFundationDemo */,
+				268557142186E1BC00114905 /* YPAVFundationDemoTests */,
+				2685571F2186E1BC00114905 /* YPAVFundationDemoUITests */,
+				268556FA2186E1BB00114905 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		268556FA2186E1BB00114905 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				268556F92186E1BB00114905 /* YPAVFundationDemo.app */,
+				268557112186E1BC00114905 /* YPAVFundationDemoTests.xctest */,
+				2685571C2186E1BC00114905 /* YPAVFundationDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		268556FB2186E1BB00114905 /* YPAVFundationDemo */ = {
+			isa = PBXGroup;
+			children = (
+				2685573A2187032400114905 /* AVAudioPlayer */,
+				268557362186F4C400114905 /* YPBaseObjects */,
+				2685572E2186E37D00114905 /* Macro.h */,
+				268556FC2186E1BB00114905 /* AppDelegate.h */,
+				268556FD2186E1BB00114905 /* AppDelegate.m */,
+				268556FF2186E1BB00114905 /* RootVC.h */,
+				268557002186E1BB00114905 /* RootVC.m */,
+				268557022186E1BB00114905 /* Main.storyboard */,
+				268557052186E1BC00114905 /* Assets.xcassets */,
+				268557072186E1BC00114905 /* LaunchScreen.storyboard */,
+				2685570A2186E1BC00114905 /* Info.plist */,
+				2685570B2186E1BC00114905 /* main.m */,
+				2685572F2186EB0200114905 /* PrefixHeader.pch */,
+			);
+			path = YPAVFundationDemo;
+			sourceTree = "<group>";
+		};
+		268557142186E1BC00114905 /* YPAVFundationDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				268557152186E1BC00114905 /* YPAVFundationDemoTests.m */,
+				268557172186E1BC00114905 /* Info.plist */,
+			);
+			path = YPAVFundationDemoTests;
+			sourceTree = "<group>";
+		};
+		2685571F2186E1BC00114905 /* YPAVFundationDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				268557202186E1BC00114905 /* YPAVFundationDemoUITests.m */,
+				268557222186E1BD00114905 /* Info.plist */,
+			);
+			path = YPAVFundationDemoUITests;
+			sourceTree = "<group>";
+		};
+		268557362186F4C400114905 /* YPBaseObjects */ = {
+			isa = PBXGroup;
+			children = (
+				268557372186F4D700114905 /* YPBaseVC.h */,
+				268557382186F4D700114905 /* YPBaseVC.m */,
+			);
+			path = YPBaseObjects;
+			sourceTree = "<group>";
+		};
+		2685573A2187032400114905 /* AVAudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				266B3A3121894A01001AA0D9 /* Resources */,
+				2685573B2187032400114905 /* Models */,
+				2685573C2187032400114905 /* ViewControllers */,
+				268557402187032400114905 /* Views */,
+			);
+			path = AVAudioPlayer;
+			sourceTree = "<group>";
+		};
+		2685573B2187032400114905 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				266B3A3421894A31001AA0D9 /* YPAudioPlayerModel.h */,
+				266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2685573C2187032400114905 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2685573D2187032400114905 /* YPAVAudioPlayerVC.h */,
+				2685573E2187032400114905 /* YPAVAudioPlayerVC.m */,
+				2685573F2187032400114905 /* YPAVAudioPlayerVC.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		268557402187032400114905 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		268556F82186E1BB00114905 /* YPAVFundationDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 268557252186E1BD00114905 /* Build configuration list for PBXNativeTarget "YPAVFundationDemo" */;
+			buildPhases = (
+				268556F52186E1BB00114905 /* Sources */,
+				268556F62186E1BB00114905 /* Frameworks */,
+				268556F72186E1BB00114905 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YPAVFundationDemo;
+			productName = YPAVFundationDemo;
+			productReference = 268556F92186E1BB00114905 /* YPAVFundationDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		268557102186E1BC00114905 /* YPAVFundationDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 268557282186E1BD00114905 /* Build configuration list for PBXNativeTarget "YPAVFundationDemoTests" */;
+			buildPhases = (
+				2685570D2186E1BC00114905 /* Sources */,
+				2685570E2186E1BC00114905 /* Frameworks */,
+				2685570F2186E1BC00114905 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				268557132186E1BC00114905 /* PBXTargetDependency */,
+			);
+			name = YPAVFundationDemoTests;
+			productName = YPAVFundationDemoTests;
+			productReference = 268557112186E1BC00114905 /* YPAVFundationDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2685571B2186E1BC00114905 /* YPAVFundationDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2685572B2186E1BD00114905 /* Build configuration list for PBXNativeTarget "YPAVFundationDemoUITests" */;
+			buildPhases = (
+				268557182186E1BC00114905 /* Sources */,
+				268557192186E1BC00114905 /* Frameworks */,
+				2685571A2186E1BC00114905 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2685571E2186E1BC00114905 /* PBXTargetDependency */,
+			);
+			name = YPAVFundationDemoUITests;
+			productName = YPAVFundationDemoUITests;
+			productReference = 2685571C2186E1BC00114905 /* YPAVFundationDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		268556F12186E1BB00114905 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = Zyp;
+				TargetAttributes = {
+					268556F82186E1BB00114905 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					268557102186E1BC00114905 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 268556F82186E1BB00114905;
+					};
+					2685571B2186E1BC00114905 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 268556F82186E1BB00114905;
+					};
+				};
+			};
+			buildConfigurationList = 268556F42186E1BB00114905 /* Build configuration list for PBXProject "YPAVFundationDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 268556F02186E1BB00114905;
+			productRefGroup = 268556FA2186E1BB00114905 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				268556F82186E1BB00114905 /* YPAVFundationDemo */,
+				268557102186E1BC00114905 /* YPAVFundationDemoTests */,
+				2685571B2186E1BC00114905 /* YPAVFundationDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		268556F72186E1BB00114905 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				268557092186E1BC00114905 /* LaunchScreen.storyboard in Resources */,
+				26CBDFB821899107000617BC /* shamoluotuoicon.jpg in Resources */,
+				266B3A3321894A09001AA0D9 /* shamoluotuo.mp3 in Resources */,
+				268557062186E1BC00114905 /* Assets.xcassets in Resources */,
+				268557422187032400114905 /* YPAVAudioPlayerVC.xib in Resources */,
+				268557042186E1BB00114905 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2685570F2186E1BC00114905 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2685571A2186E1BC00114905 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		268556F52186E1BB00114905 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				266B3A3621894A31001AA0D9 /* YPAudioPlayerModel.m in Sources */,
+				268557412187032400114905 /* YPAVAudioPlayerVC.m in Sources */,
+				268557012186E1BB00114905 /* RootVC.m in Sources */,
+				2685570C2186E1BC00114905 /* main.m in Sources */,
+				268557392186F4D700114905 /* YPBaseVC.m in Sources */,
+				268556FE2186E1BB00114905 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2685570D2186E1BC00114905 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				268557162186E1BC00114905 /* YPAVFundationDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		268557182186E1BC00114905 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				268557212186E1BC00114905 /* YPAVFundationDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		268557132186E1BC00114905 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 268556F82186E1BB00114905 /* YPAVFundationDemo */;
+			targetProxy = 268557122186E1BC00114905 /* PBXContainerItemProxy */;
+		};
+		2685571E2186E1BC00114905 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 268556F82186E1BB00114905 /* YPAVFundationDemo */;
+			targetProxy = 2685571D2186E1BC00114905 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		268557022186E1BB00114905 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				268557032186E1BB00114905 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		268557072186E1BC00114905 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				268557082186E1BC00114905 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		268557232186E1BD00114905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		268557242186E1BD00114905 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		268557262186E1BD00114905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S56T3B6DT2;
+				GCC_PREFIX_HEADER = YPAVFundationDemo/PrefixHeader.pch;
+				INFOPLIST_FILE = YPAVFundationDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zyp.YPAVFundationDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		268557272186E1BD00114905 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S56T3B6DT2;
+				GCC_PREFIX_HEADER = YPAVFundationDemo/PrefixHeader.pch;
+				INFOPLIST_FILE = YPAVFundationDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zyp.YPAVFundationDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		268557292186E1BD00114905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S56T3B6DT2;
+				INFOPLIST_FILE = YPAVFundationDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Zyp.YPAVFundationDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YPAVFundationDemo.app/YPAVFundationDemo";
+			};
+			name = Debug;
+		};
+		2685572A2186E1BD00114905 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S56T3B6DT2;
+				INFOPLIST_FILE = YPAVFundationDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Zyp.YPAVFundationDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YPAVFundationDemo.app/YPAVFundationDemo";
+			};
+			name = Release;
+		};
+		2685572C2186E1BD00114905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S56T3B6DT2;
+				INFOPLIST_FILE = YPAVFundationDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Zyp.YPAVFundationDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YPAVFundationDemo;
+			};
+			name = Debug;
+		};
+		2685572D2186E1BD00114905 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S56T3B6DT2;
+				INFOPLIST_FILE = YPAVFundationDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Zyp.YPAVFundationDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YPAVFundationDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		268556F42186E1BB00114905 /* Build configuration list for PBXProject "YPAVFundationDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				268557232186E1BD00114905 /* Debug */,
+				268557242186E1BD00114905 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		268557252186E1BD00114905 /* Build configuration list for PBXNativeTarget "YPAVFundationDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				268557262186E1BD00114905 /* Debug */,
+				268557272186E1BD00114905 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		268557282186E1BD00114905 /* Build configuration list for PBXNativeTarget "YPAVFundationDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				268557292186E1BD00114905 /* Debug */,
+				2685572A2186E1BD00114905 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2685572B2186E1BD00114905 /* Build configuration list for PBXNativeTarget "YPAVFundationDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2685572C2186E1BD00114905 /* Debug */,
+				2685572D2186E1BD00114905 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 268556F12186E1BB00114905 /* Project object */;
+}
