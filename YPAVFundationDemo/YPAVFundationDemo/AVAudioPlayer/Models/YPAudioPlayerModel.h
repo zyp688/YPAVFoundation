@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 设置播放进度*/
 - (void)setPlayProgressWithValue:(float)value;
 
-/** 实例model对象*/
-+ (instancetype)createAudioPlayerModel;
+/** 实例model单例对象*/
++ (instancetype)sharedInstance;
 
 /** 播放*/
 - (void)play;
@@ -31,7 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 /** 调节音量 value:0~1*/
 - (void)setVolumeChangedWithValue:(CGFloat)value;
 
+/** 设置播放器pan值 立体声 pan:-1.0(极左)~1.0(极右)*/
+-(void)setPanChangedWithValue:(CGFloat)value;
 
+/** 设置播放器rate值 语速
+ 设置该值之前 必须将enableRate属性设为YES
+ */
+-(void)setRateChangedWithValue:(CGFloat)value;
 
 @end
 

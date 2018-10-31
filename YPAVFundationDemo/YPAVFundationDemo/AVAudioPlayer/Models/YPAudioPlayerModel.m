@@ -11,6 +11,16 @@
  所以它可以提供所有你在Audio Queue Services中所能找到的核心功能，比如播放、循环、
  设置音频计量，但使用的却是非常简单并友好的Objective-C接口。除非你需要从网络流中播放
  音频、需要访问原始音频样本或者需要非常低的时延，否则AVAudioPlayer基本都能胜任！
+ 
+ 其可处理音频格式覆盖情况主要有以下几种：
+ AAC
+ AMR (Adaptive multi-Rate，一种语音格式)
+ ALAC (Apple lossless Audio Codec)
+ iLBC (internet Low Bitrate Codec，另一种语音格式)
+ IMA4 (IMA/ADPCM)
+ linearPCM (uncompressed)
+ u-law 和 a-law
+ MP3 (MPEG-Laudio Layer 3)
  */
 
 
@@ -31,12 +41,19 @@
 @implementation YPAudioPlayerModel
 
 #pragma mark -
-#pragma mark - createAudipoPlayerModel 创建model对象
-+ (instancetype)createAudioPlayerModel {
-    YPAudioPlayerModel *model = [YPAudioPlayerModel new];
-    model.player = [model createAudioPlayerWithMusicName:@"shamoluotuo"];
-    return model;
+#pragma mark - sharedInstance 创建model单例对象
+
+static id _instance;
++ (instancetype)sharedInstance
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+        ((YPAudioPlayerModel *)_instance).player = [_instance createAudioPlayerWithMusicName:@"shamoluotuo"];
+    });
+    return _instance;
 }
+
 
 #pragma mark -
 #pragma mark - createAudioPlayerWithMusicName: 创建播放器，name:工程内音乐文件的名字
@@ -54,7 +71,7 @@
          */
         player.enableRate = YES;
         
-        /** -volume:播放器独立的音频音量设置*/
+        /** -volume:播放器独立的音频音量设置 后面修改时有详细记录，这里只是设置个默认值*/
         player.volume = 0.6;
         
         /** prepareToPlay:该方法会取得需要的音频硬件并预加载Audio Queue的缓冲区，
@@ -91,6 +108,9 @@
 - (void)setPlayProgressWithValue:(float)value {
     double currentTime = value * self.player.duration;
     self.player.currentTime = currentTime;
+    if (!self.isPlaying) {
+        [self play];
+    }
 }
 
 
@@ -129,10 +149,13 @@
         [self.player stop];
         self.player.currentTime = 0.0;
         self.isPlaying = NO;
+        //停止时销毁播放进度捕捉的计时器
+        [self.catchPlayProgressTimer invalidate];
+        self.catchPlayProgressTimer = nil;
+        
+        [self catchPlayProgress];
     }
 }
-
-
 
 #pragma mark -
 #pragma mark - volumeChanged: 调节音量大小
@@ -150,6 +173,41 @@
     self.player.volume = value;
 }
 
+#pragma mark -
+#pragma mark - setPanChangedWithValue: 调节立体声效果
+/**
+ -pan:立体声播放声音
+ 默认值为0.0（居中）
+ 范围为-1.0(极左) ~ 1.0(极右)
+ */
+-(void)setPanChangedWithValue:(CGFloat)value {
+    if (value < -1.0 || value > 1.0) {
+        //容错
+        return;
+    }
+    
+    self.player.pan = value;
+}
+
+#pragma mark -
+#pragma mark - setRateChangedWithValue: 设置播放的速率
+/**
+ -rate:属性 设置播放的速率
+ 默认为1.0为正常
+ 0.5缩短一半
+ 2.0加快一倍
+ 注：设置该值之前必须将是否允许控制播放速率为YES，即enableRate属性
+ */
+-(void)setRateChangedWithValue:(CGFloat)value {
+    if (!self.player.enableRate) {
+        //兼容性判断 如果没有开启播放速率控制，则主动开启，避免方法设置效果无用
+        self.player.enableRate = YES;
+    }
+    self.player.rate = value;
+}
+
+#pragma mark -
+#pragma mark - Other ....  匹配一些可能业务中需要的效果⤵️ 具体按照自己的业务需求来
 /** 将时间按照 05:00 分钟:秒  格式返回*/
 - (NSString *)getMinuteAndSecondTimeStrWithSecond:(NSInteger)totalSecond {
     NSInteger minute = totalSecond / 60;
@@ -158,6 +216,7 @@
     return timeStr;
 }
 
+/** 需求为 【播放时长/总时长】 这种格式返回 仿mac qq音乐 */
 - (NSString *)getPlayingTimeString {
     NSString *totalTimeString = [self getMinuteAndSecondTimeStrWithSecond:self.player.duration];
     NSString *currentTimeString = [self getMinuteAndSecondTimeStrWithSecond:self.player.currentTime];

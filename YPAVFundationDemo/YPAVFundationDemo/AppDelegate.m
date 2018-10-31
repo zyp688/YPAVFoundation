@@ -19,9 +19,38 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window.backgroundColor = [UIColor whiteColor];
-
+    
+    
+    /** 配置音频回话  这里AVAudioSession为全局的单例
+        工程角度上来说在该声明周期中设置最为合适
+     */
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
+    /** Categorys: 音频会话分类说明：AVFoundation定义了7种分类来描述应用程序所
+     使用的音频行为
+     -AVAudioSessionCategoryAmbient:
+        ->游戏、效率应用程序, 支持混音, 不支持音频输入, 支持音频输出
+     
+     -AVAudioSessionCategorySoloAmbient:
+        ->游戏、效率应用程序, 不支持混音, 不支持音频输入, 支持音频输出
+     
+     -AVAudioSessionCategoryPlayback:
+        ->音频和视频播放器, 支持混音(可选), 不支持音频输入, 支持音频输出
+     
+     -AVAudioSessionCategoryRecord:
+        ->录音机、音频捕捉, 不支持混音, 支持音频输入, 不支持音频输出
+     
+     -AVAudioSessionCategoryPlayAndRecord:
+        ->VoIP、语音聊天, 支持混音(可选), 支持音频输入, 支持音频输出
+     
+     -AVAudioSessionCategoryAudioProcessing:
+        ->离线会话处理, 不支持混音, 不支持音频输入, 不支持音频输出
+     
+     -AVAudioSessionCategoryMultiRoute:
+        ->使用外部硬件的高级A/V应用程序, 不支持混音, 支持音频输入, 支持音频输出
+     
+     更复杂的应用通过使用options和modes方法进一步自定义开发
+     */
     if (![session setCategory:AVAudioSessionCategoryPlayback error:&error]) {
         DLog(@"Category error is %@",[error localizedDescription]);
     }

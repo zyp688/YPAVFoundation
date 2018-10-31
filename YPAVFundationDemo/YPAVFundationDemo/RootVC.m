@@ -97,7 +97,7 @@
 #pragma mark – ⬇️ 💖 Getters / Setters 💖 ⬇️
 - (NSArray *)itemsArr {
     if (!_itemsArr) {
-        _itemsArr = @[@"使用AVAudioPlayer播放音频"];
+        _itemsArr = @[@"AVAudioPlayer实战"];
     }
     
     return _itemsArr;
