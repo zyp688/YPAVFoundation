@@ -10,4 +10,7 @@
 
 @interface YPBaseVC : UIViewController
 
+
+- (void)backAction;
+
 @end

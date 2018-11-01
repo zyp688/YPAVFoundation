@@ -90,6 +90,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id vc = [[NSClassFromString(self.jumpPages[indexPath.row]) alloc] init];
+    [vc setValue:self.itemsArr[indexPath.row] forKey:@"title"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

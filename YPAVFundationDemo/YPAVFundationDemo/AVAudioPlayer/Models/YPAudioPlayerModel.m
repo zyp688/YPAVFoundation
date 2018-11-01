@@ -30,8 +30,6 @@
 
 /** 播放器*/
 @property (strong, nonatomic) AVAudioPlayer *player;
-/** 是否正在播放*/
-@property (assign, nonatomic) BOOL isPlaying;
 /** 捕捉播放进度的定时器*/
 @property (strong, nonatomic) NSTimer *catchPlayProgressTimer;
 
@@ -84,10 +82,115 @@ static id _instance;
         self.catchPlayProgressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(catchPlayProgress) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:self.catchPlayProgressTimer forMode:NSDefaultRunLoopMode];
         
+        /** 是否支持后台音乐播放的补充说明
+            -当程序退出后台或者锁屏时，有时业务上需要我们的播放器能够继续播放
+            -此时需要对应用程序的info.plist文件进行细微修改来实现对该功能的支撑
+         
+         ~在Xcode Project Navigator面板找到应用程序的info.plist文件，用Xcode属性列表编辑器打开。添加
+         一个新的Required background modes类型的数组，在其中添加名为
+         App plays audio or steams audio/video using AirPlay的选项
+         
+         ~也可在info中直接修改
+         
+         ~也可右击info.plist 文件，在响应的XML部分编辑plist，依次选择Open As | Source code
+         将如下条目添加到文件底部的</dict>标签之前：
+         <key>UIBackgroundModes</key>
+         <array>
+            <string>audio</string>
+         </array>
+         */
+        
+        /** 注册终断通知
+            -当收到外界的电话、闹钟响起、弹出FaceTime请求等状况，虽然iOS系统本身可以很好的处理这些事件，不过我们
+            还是要确保“应用本身”针对这些情况的处理也足够完美
+         */
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:[AVAudioSession sharedInstance]];
+        
+        /** 对线路改变的响应处理
+            -在iOS设备上添加或移除音频输入、输出线路时，会发生线路改变。有多重原因会导致线路变化，比如用户插入耳机或
+         断开USB麦克风。当此类事件发生时，音频会根据情况改变输入或者输出线路，同事AVAudioSession会广播一个描述该变化
+         的通知给所有的侦听器。为遵循Apple的Human Interface Guidelines(HIG)的相关定义，应用程序应该成为这些侦听器
+         中的一员
+         
+            -注册线路改变的通知
+         */
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRouteChange:) name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
+        
+        
+        
         return player;
     }
     
     return nil;
+}
+
+#pragma mark -
+#pragma mark - handleInterruption: 监听到中断通知事件
+- (void)handleInterruption:(NSNotification *)notification {
+    NSDictionary *info = notification.userInfo;
+    //通过type对中断的类型进行判断处理
+    AVAudioSessionInterruptionType type = [info[AVAudioSessionInterruptionTypeKey] unsignedIntegerValue];
+    if (type == AVAudioSessionInterruptionTypeBegan) {
+        //中断事件开始
+        [self stop];
+        //回传给VC层处理一些UI等等...
+        if (self.playStoppedBlock) {
+            self.playStoppedBlock();
+        }
+        
+    }else {
+        //中断事件结束  AVAudioSessionInterruptionTypeEnded
+        /** 如果中断类型为 AVAudioSessionInterruptionTypeEnded，
+            userInfo字典中会包含一个AVAudioSessionInterruptionOptions值来表明音频会话是否已经重新激活
+            以及是否可以再次播放
+         */
+        AVAudioSessionInterruptionOptions options = [info[AVAudioSessionInterruptionTypeKey] unsignedIntegerValue];
+        if (options == AVAudioSessionInterruptionOptionShouldResume) {
+            /** 当options的值为AVAudioSessionInterruptionOptionShouldResume，需要调用play方法
+             并通过调用自身的block方法实现状态的回传
+             */
+            [self play];
+            //回传给VC层处理一些UI等等...
+            if (self.playBeganBlock) {
+                self.playBeganBlock();
+            }
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark - handleRouteChange: 监听到线路发生改变的通知事件
+- (void)handleRouteChange:(NSNotification *)notification {
+    NSDictionary *info = notification.userInfo;
+    //通过reason对线路变化的原因进行判断处理
+    AVAudioSessionRouteChangeReason reason = [info[AVAudioSessionRouteChangeReasonKey] unsignedIntegerValue];
+    
+    if (reason == AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {
+        /** 有设备断开连接
+            -知道有设备断开连接后，需要向userinfo字典提出请求，以获得其中用于描述前一个线路的AVAudioSessionRouteDescription。线路的描述信息整合在一个输入NSArray和一个输出NSArray中。
+            数组中的元素都是AVAudioSessionPortDescription的实例，用于描述不同的I/O接口属性。
+         
+         上述情况下，需要从线路描述中找到第一个输出接口并判断是否为耳机接口。如果是，则停止播放，并调用中断停止Block
+         做停止相关的处理
+         */
+        
+        //以前的线路
+        AVAudioSessionRouteDescription *previousRoutes = info[AVAudioSessionRouteChangePreviousRouteKey];
+        //以前的第一个输出接口
+        AVAudioSessionPortDescription *previousOutput = previousRoutes.outputs[0];
+        //第一个输出接口的类型
+        NSString *portType = previousOutput.portType;
+        
+        if ([portType isEqualToString:AVAudioSessionPortHeadphones]) {
+            //是耳机接口 停止播放
+            [self stop];
+            
+            //回传给VC层处理一些UI等等...
+            if (self.playStoppedBlock) {
+                self.playBeganBlock();
+            }
+        }
+    }
 }
 
 
@@ -97,8 +200,8 @@ static id _instance;
     double currentTime = self.player.currentTime;
     double totalTime = self.player.duration;
     float progress = currentTime / totalTime;
-    if (self.updateProgress) {
-        self.updateProgress(progress,[self getPlayingTimeString]);
+    if (self.updateProgressBlock) {
+        self.updateProgressBlock(progress,[self getPlayingTimeString]);
     }
 }
 
@@ -206,8 +309,10 @@ static id _instance;
     self.player.rate = value;
 }
 
+
+
 #pragma mark -
-#pragma mark - Other ....  匹配一些可能业务中需要的效果⤵️ 具体按照自己的业务需求来
+#pragma mark - Other ....  匹配一些可能业务中需要的效果⤵️ 具体按照自己的业务需求来 *****
 /** 将时间按照 05:00 分钟:秒  格式返回*/
 - (NSString *)getMinuteAndSecondTimeStrWithSecond:(NSInteger)totalSecond {
     NSInteger minute = totalSecond / 60;

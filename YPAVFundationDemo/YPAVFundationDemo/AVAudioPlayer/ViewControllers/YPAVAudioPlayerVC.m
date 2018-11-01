@@ -30,17 +30,15 @@
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.playerModel = [YPAudioPlayerModel sharedInstance];
     
+    self.playerModel = [YPAudioPlayerModel sharedInstance];
     
     //根据播放进度的捕捉Block回调 刷新一些UI  业务层处理~~~
     __weak typeof(self)weakself = self;
-    self.playerModel.updateProgress = ^(CGFloat playProgress, NSString * _Nonnull playingTimeStr) {
+    self.playerModel.updateProgressBlock = ^(CGFloat playProgress, NSString * _Nonnull playingTimeStr) {
         weakself.playProgressSlider.value = playProgress;
         weakself.progressTimeLbl.text = playingTimeStr;
     };
-    
-    
     
 }
 
@@ -97,6 +95,27 @@
 
 #pragma mark – ⬇️ 💖 Methods 💖 ⬇️
 
+- (void)backAction {
+    if (self.playerModel.isPlaying) {
+        __weak typeof(self)weakself = self;
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"检测到音乐正在播放\n，需要停止么播放么？" preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"任性听直接返回" style:UIAlertActionStyleCancel handler:^void(UIAlertAction *action){
+            [super backAction];
+        }];
+        
+        UIAlertAction *stopAction = [UIAlertAction actionWithTitle:@"停止播放后返回" style:  UIAlertActionStyleDestructive handler:^void(UIAlertAction *action){
+            [weakself.playerModel stop];
+            [super backAction];
+        }];
+        
+        [alertVC addAction:continueAction];
+        [alertVC addAction:stopAction];
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }else {
+        [super backAction];
+    }
+}
 
 #pragma mark – ⬇️ 💖 Delegate 💖 ⬇️
 
