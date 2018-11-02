@@ -13,8 +13,16 @@
 
 
 #import "YPAVAudioRecorderVC.h"
+#import "YPAudioRecorderModel.h"
 
-@interface YPAVAudioRecorderVC ()
+#import "YPAudioPlayerModel.h"
+
+@interface YPAVAudioRecorderVC () <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) YPAudioRecorderModel *recorderModel;
+
+/** 备忘的录制完的音频*/
+@property (strong, nonatomic) NSMutableArray <YPMemoAudiosModel *>*memoAudiosArr;
 
 @end
 
@@ -33,6 +41,10 @@
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.recorderModel = [YPAudioRecorderModel sharedInstance];
+    self.tbv.delegate = self;
+    self.tbv.dataSource = self;
     
 }
 
@@ -56,11 +68,64 @@
 
 
 #pragma mark – ⬇️ 💖 Delegate 💖 ⬇️
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.memoAudiosArr.count;
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 45.0f;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellID = @"memoAudioCellID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    cell.textLabel.text = ((YPMemoAudiosModel *)self.memoAudiosArr[indexPath.row]).name;
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.recorderModel playMemoAudio:self.memoAudiosArr[indexPath.row]];
+}
 
 #pragma mark – ⬇️ 💖 Getters / Setters 💖 ⬇️
 
 
 
+
+- (IBAction)recordBtnAction:(UIButton *)sender {
+    [self.recorderModel record];
+    
+}
+
+
+- (IBAction)stopBtnAction:(UIButton *)sender {
+    [self.recorderModel stopWithCompletionHandler:^(BOOL flag) {
+        if (flag) {
+            [self.recorderModel saveRecordingWithName:@"" completionHandler:^(BOOL success, id _Nonnull obj) {
+                if (success) {
+                    NSArray *objArr = (NSArray *)obj;
+                    YPMemoAudiosModel *model = [[YPMemoAudiosModel alloc] init];
+                    [model memoWithName:objArr[0] url:objArr[1]];
+                    [self.memoAudiosArr addObject:model];
+                    
+                    [self.tbv reloadData];
+                }
+            }];
+        }
+    }];
+}
+
+
+- (NSMutableArray<YPMemoAudiosModel *> *)memoAudiosArr {
+    if (!_memoAudiosArr) {
+        _memoAudiosArr = [NSMutableArray array];
+    }
+    
+    return _memoAudiosArr;
+}
 
 @end

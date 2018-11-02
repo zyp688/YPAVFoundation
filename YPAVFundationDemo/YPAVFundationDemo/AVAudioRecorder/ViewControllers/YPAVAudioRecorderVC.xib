@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YPAVAudioRecorderVC">
+            <connections>
+                <outlet property="recordBtn" destination="lvR-Rm-3zq" id="z6K-xI-agj"/>
+                <outlet property="stopBtn" destination="krC-Xr-g79" id="bpU-60-96R"/>
+                <outlet property="tbv" destination="DMX-a6-R29" id="zOc-2E-Hvb"/>
+                <outlet property="timeLbl" destination="lQj-6n-oHZ" id="cb8-Gb-fy4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQj-6n-oHZ">
+                    <rect key="frame" x="150" y="88" width="75" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="5bA-I1-cRm"/>
+                        <constraint firstAttribute="width" constant="75" id="RA7-b7-PH5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvR-Rm-3zq">
+                    <rect key="frame" x="60" y="125" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.66799789669999998" green="0.47512125970000002" blue="0.25860109930000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="1oW-Uh-X5j"/>
+                        <constraint firstAttribute="height" constant="30" id="GTI-v5-lzl"/>
+                    </constraints>
+                    <state key="normal" title="开始录制">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="recordBtnAction:" destination="-1" eventType="touchUpInside" id="Y0A-sa-rUs"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DMX-a6-R29">
+                    <rect key="frame" x="20" y="180" width="335" height="477"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krC-Xr-g79">
+                    <rect key="frame" x="235" y="125" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.81176470590000005" green="0.20392156859999999" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="FqN-rR-aFY"/>
+                        <constraint firstAttribute="height" constant="30" id="SJV-7X-5Hc"/>
+                    </constraints>
+                    <state key="normal" title="停止录制">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="stopBtnAction:" destination="-1" eventType="touchUpInside" id="MDM-Ha-XKT"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="krC-Xr-g79" firstAttribute="centerY" secondItem="lvR-Rm-3zq" secondAttribute="centerY" id="02d-gi-EoX"/>
+                <constraint firstItem="DMX-a6-R29" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="0Df-BA-rHM"/>
+                <constraint firstItem="lQj-6n-oHZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Daa-Gm-h3d"/>
+                <constraint firstItem="krC-Xr-g79" firstAttribute="leading" secondItem="lQj-6n-oHZ" secondAttribute="trailing" constant="10" id="PDg-Jp-AXZ"/>
+                <constraint firstItem="lQj-6n-oHZ" firstAttribute="leading" secondItem="lvR-Rm-3zq" secondAttribute="trailing" constant="10" id="YoX-YT-VDi"/>
+                <constraint firstItem="DMX-a6-R29" firstAttribute="top" secondItem="lvR-Rm-3zq" secondAttribute="bottom" constant="25" id="Z5v-Kj-qRs"/>
+                <constraint firstAttribute="bottom" secondItem="DMX-a6-R29" secondAttribute="bottom" constant="10" id="fYE-1W-DeF"/>
+                <constraint firstItem="lvR-Rm-3zq" firstAttribute="top" secondItem="lQj-6n-oHZ" secondAttribute="bottom" constant="15" id="uXS-g5-RWZ"/>
+                <constraint firstItem="lQj-6n-oHZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="88" id="zDP-RC-Bb7"/>
+                <constraint firstAttribute="trailing" secondItem="DMX-a6-R29" secondAttribute="trailing" constant="20" id="zdf-V4-XXq"/>
+            </constraints>
+            <point key="canvasLocation" x="53.600000000000001" y="59.820089955022496"/>
+        </view>
+    </objects>
+</document>
