@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		266B3A3321894A09001AA0D9 /* shamoluotuo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */; };
 		266B3A3621894A31001AA0D9 /* YPAudioPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */; };
+		267010E3218AF4C700E96048 /* YPAVAudioRecorderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 267010E1218AF4C700E96048 /* YPAVAudioRecorderVC.m */; };
+		267010E4218AF4C700E96048 /* YPAudioRecorderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267010E2218AF4C700E96048 /* YPAudioRecorderVC.xib */; };
+		267010E7218AFD4800E96048 /* YPAudioRecoderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 267010E6218AFD4800E96048 /* YPAudioRecoderModel.m */; };
 		268556FE2186E1BB00114905 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 268556FD2186E1BB00114905 /* AppDelegate.m */; };
 		268557012186E1BB00114905 /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 268557002186E1BB00114905 /* RootVC.m */; };
 		268557042186E1BB00114905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268557022186E1BB00114905 /* Main.storyboard */; };
@@ -44,6 +47,11 @@
 		266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shamoluotuo.mp3; sourceTree = "<group>"; };
 		266B3A3421894A31001AA0D9 /* YPAudioPlayerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPAudioPlayerModel.h; sourceTree = "<group>"; };
 		266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAudioPlayerModel.m; sourceTree = "<group>"; };
+		267010E0218AF4C700E96048 /* YPAVAudioRecorderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPAVAudioRecorderVC.h; sourceTree = "<group>"; };
+		267010E1218AF4C700E96048 /* YPAVAudioRecorderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAVAudioRecorderVC.m; sourceTree = "<group>"; };
+		267010E2218AF4C700E96048 /* YPAudioRecorderVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YPAudioRecorderVC.xib; sourceTree = "<group>"; };
+		267010E5218AFD4800E96048 /* YPAudioRecoderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPAudioRecoderModel.h; sourceTree = "<group>"; };
+		267010E6218AFD4800E96048 /* YPAudioRecoderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAudioRecoderModel.m; sourceTree = "<group>"; };
 		268556F92186E1BB00114905 /* YPAVFundationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YPAVFundationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		268556FC2186E1BB00114905 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		268556FD2186E1BB00114905 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -104,6 +112,65 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		267010D9218AF46800E96048 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		267010DA218AF47800E96048 /* AVAudioRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				267010DB218AF47800E96048 /* Resources */,
+				267010DC218AF47800E96048 /* Others */,
+				267010DD218AF47800E96048 /* Models */,
+				267010DE218AF47800E96048 /* ViewControllers */,
+				267010DF218AF47800E96048 /* Views */,
+			);
+			path = AVAudioRecorder;
+			sourceTree = "<group>";
+		};
+		267010DB218AF47800E96048 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		267010DC218AF47800E96048 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		267010DD218AF47800E96048 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				267010E5218AFD4800E96048 /* YPAudioRecoderModel.h */,
+				267010E6218AFD4800E96048 /* YPAudioRecoderModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		267010DE218AF47800E96048 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				267010E0218AF4C700E96048 /* YPAVAudioRecorderVC.h */,
+				267010E1218AF4C700E96048 /* YPAVAudioRecorderVC.m */,
+				267010E2218AF4C700E96048 /* YPAudioRecorderVC.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		267010DF218AF47800E96048 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		268556F02186E1BB00114905 = {
 			isa = PBXGroup;
 			children = (
@@ -127,9 +194,9 @@
 		268556FB2186E1BB00114905 /* YPAVFundationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				267010DA218AF47800E96048 /* AVAudioRecorder */,
 				2685573A2187032400114905 /* AVAudioPlayer */,
 				268557362186F4C400114905 /* YPBaseObjects */,
-				2685572E2186E37D00114905 /* Macro.h */,
 				268556FC2186E1BB00114905 /* AppDelegate.h */,
 				268556FD2186E1BB00114905 /* AppDelegate.m */,
 				268556FF2186E1BB00114905 /* RootVC.h */,
@@ -165,6 +232,7 @@
 		268557362186F4C400114905 /* YPBaseObjects */ = {
 			isa = PBXGroup;
 			children = (
+				2685572E2186E37D00114905 /* Macro.h */,
 				268557372186F4D700114905 /* YPBaseVC.h */,
 				268557382186F4D700114905 /* YPBaseVC.m */,
 			);
@@ -174,6 +242,7 @@
 		2685573A2187032400114905 /* AVAudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				267010D9218AF46800E96048 /* Others */,
 				266B3A3121894A01001AA0D9 /* Resources */,
 				2685573B2187032400114905 /* Models */,
 				2685573C2187032400114905 /* ViewControllers */,
@@ -311,6 +380,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				267010E4218AF4C700E96048 /* YPAudioRecorderVC.xib in Resources */,
 				268557092186E1BC00114905 /* LaunchScreen.storyboard in Resources */,
 				26CBDFB821899107000617BC /* shamoluotuoicon.jpg in Resources */,
 				266B3A3321894A09001AA0D9 /* shamoluotuo.mp3 in Resources */,
@@ -341,6 +411,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				267010E7218AFD4800E96048 /* YPAudioRecoderModel.m in Sources */,
+				267010E3218AF4C700E96048 /* YPAVAudioRecorderVC.m in Sources */,
 				266B3A3621894A31001AA0D9 /* YPAudioPlayerModel.m in Sources */,
 				268557412187032400114905 /* YPAVAudioPlayerVC.m in Sources */,
 				268557012186E1BB00114905 /* RootVC.m in Sources */,

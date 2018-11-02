@@ -9,6 +9,8 @@
 #import "RootVC.h"
 
 #import "YPAVAudioPlayerVC.h"
+#import "YPAVAudioRecorderVC.h"
+
 
 
 @interface RootVC () <UITableViewDelegate, UITableViewDataSource>
@@ -62,8 +64,7 @@
 #pragma mark -
 #pragma mark - uiConfig
 - (void)uiConfig {
-    
-    self.title = @"AVFoundation";
+    self.title = @"AVFoundation教科书级学习";
     
     [self.view addSubview:self.itemsTbv];
 }
@@ -98,7 +99,7 @@
 #pragma mark – ⬇️ 💖 Getters / Setters 💖 ⬇️
 - (NSArray *)itemsArr {
     if (!_itemsArr) {
-        _itemsArr = @[@"AVAudioPlayer实战"];
+        _itemsArr = @[@"AVAudioPlayer播放音乐实战",@"AVAudioRecorder录制音频实战"];
     }
     
     return _itemsArr;
@@ -117,7 +118,7 @@
 
 - (NSArray *)jumpPages {
     if (!_jumpPages) {
-        _jumpPages = @[@"YPAVAudioPlayerVC"];
+        _jumpPages = @[@"YPAVAudioPlayerVC",@"YPAVAudioRecorderVC"];
     }
     
     return _jumpPages;

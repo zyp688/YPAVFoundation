@@ -101,18 +101,20 @@ static id _instance;
          */
         
         /** 注册终断通知
-            -当收到外界的电话、闹钟响起、弹出FaceTime请求等状况，虽然iOS系统本身可以很好的处理这些事件，不过我们
-            还是要确保“应用本身”针对这些情况的处理也足够完美
+            -当收到外界的电话、闹钟响起、弹出FaceTime请求等状况，虽然iOS系统本身
+            可以很好的处理这些事件，不过我们还是要确保“应用本身”针对这些情况的
+            处理也足够完美
          */
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:[AVAudioSession sharedInstance]];
         
         /** 对线路改变的响应处理
-            -在iOS设备上添加或移除音频输入、输出线路时，会发生线路改变。有多重原因会导致线路变化，比如用户插入耳机或
-         断开USB麦克风。当此类事件发生时，音频会根据情况改变输入或者输出线路，同事AVAudioSession会广播一个描述该变化
-         的通知给所有的侦听器。为遵循Apple的Human Interface Guidelines(HIG)的相关定义，应用程序应该成为这些侦听器
-         中的一员
+            -在iOS设备上添加或移除音频输入、输出线路时，会发生线路改变。有多重原因
+            会导致线路变化，比如用户插入耳机或断开USB麦克风。当此类事件发生时，
+            音频会根据情况改变输入或者输出线路，同事AVAudioSession会广播一个描述
+            该变化的通知给所有的侦听器。为遵循Apple的Human Interface
+            Guidelines(HIG)的相关定义，应用程序应该成为这些侦听器中的一员
          
-            -注册线路改变的通知
+        -注册线路改变的通知
          */
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRouteChange:) name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
         
