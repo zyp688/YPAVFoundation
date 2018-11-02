@@ -211,22 +211,34 @@ static id _instance;
 #pragma mark - saveRecordingWithName: completionHandler: 将录制完成的录音按照name的名字保存起来
 - (void)saveRecordingWithName:(NSString *)name completionHandler:(recordingSaveCompletionHandler)handler {
     NSTimeInterval timeStamp = [NSDate timeIntervalSinceReferenceDate];
-    NSString *fileName = [NSString stringWithFormat:@"%@_%.0f.caf",name,timeStamp];
+    NSString *fileName = [NSString stringWithFormat:@"/%@_%.0f.caf",name,timeStamp];
     NSString *docsDir = [self documentsDirectory];
     NSString *destPath = [docsDir stringByAppendingString:fileName];
     NSURL *srcURL = [NSURL fileURLWithPath:self.recorder.url.path];
-    NSURL *destURL = [NSURL fileURLWithPath:destPath];
-    NSError *error;
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isExist = [fileManager fileExistsAtPath:srcURL.path];
     if (isExist) {
-        BOOL success = [fileManager copyItemAtURL:srcURL toURL:destURL error:&error];
-        if (success) {
-            handler(YES,@[name,destURL]);
+        
+        
+        NSData *mydata = [NSData dataWithContentsOfFile:srcURL.path];
+        BOOL isSaved = [mydata writeToFile:destPath atomically:NO];
+        if (isSaved) {
+            handler(YES,@[name,destPath]);
             [self.recorder prepareToRecord];
         }else {
-            handler(NO,error);
+            handler(NO,@[@"error",@""]);
         }
+        
+//        NSURL *destURL = [NSURL fileURLWithPath:destPath];
+//        NSError *error;
+//        BOOL success = [fileManager copyItemAtURL:srcURL toURL:destURL error:&error];
+//        if (success) {
+//            handler(YES,@[name,destURL]);
+//            [self.recorder prepareToRecord];
+//        }else {
+//            handler(NO,error);
+//        }
     }
 }
 

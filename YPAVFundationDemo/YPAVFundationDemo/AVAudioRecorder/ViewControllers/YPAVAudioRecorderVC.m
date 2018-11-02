@@ -105,11 +105,11 @@
 - (IBAction)stopBtnAction:(UIButton *)sender {
     [self.recorderModel stopWithCompletionHandler:^(BOOL flag) {
         if (flag) {
-            [self.recorderModel saveRecordingWithName:@"" completionHandler:^(BOOL success, id _Nonnull obj) {
+            [self.recorderModel saveRecordingWithName:@"record" completionHandler:^(BOOL success, id _Nonnull obj) {
                 if (success) {
                     NSArray *objArr = (NSArray *)obj;
                     YPMemoAudiosModel *model = [[YPMemoAudiosModel alloc] init];
-                    [model memoWithName:objArr[0] url:objArr[1]];
+                    [model memoWithName:objArr[0] url:[NSURL URLWithString:objArr[1]]];
                     [self.memoAudiosArr addObject:model];
                     
                     [self.tbv reloadData];
