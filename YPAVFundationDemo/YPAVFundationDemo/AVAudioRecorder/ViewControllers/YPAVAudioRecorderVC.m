@@ -13,9 +13,10 @@
 
 
 #import "YPAVAudioRecorderVC.h"
+
+/** 录制功能方法Model*/
 #import "YPAudioRecorderModel.h"
 
-#import "YPAudioPlayerModel.h"
 
 @interface YPAVAudioRecorderVC () <UITableViewDelegate, UITableViewDataSource>
 
@@ -23,6 +24,9 @@
 
 /** 备忘的录制完的音频*/
 @property (strong, nonatomic) NSMutableArray <YPMemoAudiosModel *>*memoAudiosArr;
+
+/** 记录一下录制的时间并更新在Label上显示*/
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -63,9 +67,63 @@
 
 #pragma mark – ⬇️ 💖 Events 💖 ⬇️
 
+#pragma mark -
+#pragma mark - recordBtnAction: 开始录音
+- (IBAction)recordBtnAction:(UIButton *)sender {
+    [self.recorderModel record];
+    
+    [self startTimer];
+}
+
+#pragma mark -
+#pragma mark - stopBtnAction: 停止录音-> 提示保存一下
+- (IBAction)stopBtnAction:(UIButton *)sender {
+    [self.recorderModel stopWithCompletionHandler:^(BOOL flag) {
+        if (flag) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"保存录音" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.placeholder = @"请输入名字";
+            }];
+            
+            UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //textFields是一个数组，获取所输入的字符串
+                DLog(@"%@",alertController.textFields.lastObject.text);
+                [self.recorderModel saveRecordingWithName:alertController.textFields.lastObject.text completionHandler:^(BOOL success, id _Nonnull obj) {
+                    if (success) {
+                        NSArray *objArr = (NSArray *)obj;
+                        YPMemoAudiosModel *model =
+                        [YPMemoAudiosModel memoWithName:objArr[0] url:[NSURL URLWithString:objArr[1]]];
+                        [self.memoAudiosArr addObject:model];
+                        [self.tbv reloadData];
+                    }
+                }];
+            }];
+            
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                DLog(@"点击了取消");
+            }];
+            
+            [alertController addAction:saveAction];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
+}
 
 #pragma mark – ⬇️ 💖 Methods 💖 ⬇️
+#pragma mark -
+#pragma mark - startTimer
+- (void)startTimer {
+    [self.timer invalidate];
+    self.timer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(updateTimeDisplay) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+}
 
+#pragma mark -
+#pragma mark - updateTimeDisplay 更新录制时间的显示
+- (void)updateTimeDisplay {
+    self.timeLbl.text = [self.recorderModel formatCurrentTime];
+}
 
 #pragma mark – ⬇️ 💖 Delegate 💖 ⬇️
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -92,33 +150,6 @@
 }
 
 #pragma mark – ⬇️ 💖 Getters / Setters 💖 ⬇️
-
-
-
-
-- (IBAction)recordBtnAction:(UIButton *)sender {
-    [self.recorderModel record];
-    
-}
-
-
-- (IBAction)stopBtnAction:(UIButton *)sender {
-    [self.recorderModel stopWithCompletionHandler:^(BOOL flag) {
-        if (flag) {
-            [self.recorderModel saveRecordingWithName:@"record" completionHandler:^(BOOL success, id _Nonnull obj) {
-                if (success) {
-                    NSArray *objArr = (NSArray *)obj;
-                    YPMemoAudiosModel *model = [[YPMemoAudiosModel alloc] init];
-                    [model memoWithName:objArr[0] url:[NSURL URLWithString:objArr[1]]];
-                    [self.memoAudiosArr addObject:model];
-                    
-                    [self.tbv reloadData];
-                }
-            }];
-        }
-    }];
-}
-
 
 - (NSMutableArray<YPMemoAudiosModel *> *)memoAudiosArr {
     if (!_memoAudiosArr) {

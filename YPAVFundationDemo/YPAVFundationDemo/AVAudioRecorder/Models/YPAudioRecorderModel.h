@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class YPMemoAudiosModel;
+@class YPLevelPair;
 
 typedef void(^recordingStopCompletionHandler)(BOOL);
 typedef void(^recordingSaveCompletionHandler)(BOOL,id);
@@ -24,8 +25,13 @@ typedef void(^recordingSaveCompletionHandler)(BOOL,id);
 
 /** 录音*/
 - (void)record;
+
+/** 录制的时间*/
+- (NSString *)formatCurrentTime;
+
 /** 暂停录音*/
 - (void)pause;
+
 /** 停止录音*/
 - (void)stopWithCompletionHandler:(recordingStopCompletionHandler)handler;
 
@@ -34,6 +40,9 @@ typedef void(^recordingSaveCompletionHandler)(BOOL,id);
 
 /** 播放录音*/
 - (BOOL)playMemoAudio:(YPMemoAudiosModel *)model;
+
+/** 声明个对象，来保存下声音的等级*/
+- (YPLevelPair *)levels;
 
 @end
 
@@ -48,7 +57,7 @@ typedef void(^recordingSaveCompletionHandler)(BOOL,id);
 @property (strong, nonatomic) NSURL *url;
 
 //在保存完录音成功后，调用该方法记录下录音名字和保存的地址url
-- (void)memoWithName:(NSString *)name url:(NSURL *)url;
++ (YPMemoAudiosModel *)memoWithName:(NSString *)name url:(NSURL *)url;
 
 @end
 

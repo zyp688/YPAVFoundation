@@ -9,6 +9,8 @@
 #import "YPAudioRecorderModel.h"
 #import <AVFoundation/AVFoundation.h>
 
+#import "YPMeterTable.h"
+
 @interface YPAudioRecorderModel () <AVAudioRecorderDelegate>
 
 /** 播放*/
@@ -17,6 +19,10 @@
 @property (strong, nonatomic) AVAudioRecorder *recorder;
 /** 持有下处理block，在需要调用的调用*/
 @property (copy, nonatomic) recordingStopCompletionHandler stopCompletionHandler;
+
+/** 保存音频的计量表格*/
+@property (strong, nonatomic) YPMeterTable *meterTable;
+
 @end
 
 @implementation YPAudioRecorderModel
@@ -33,6 +39,9 @@ static id _instance;
         
         /** 创建AVRecord实例*/
         ((YPAudioRecorderModel *)_instance).recorder = [_instance createRecorder];
+        
+        /** 创建音频计量表格的实例*/
+        ((YPAudioRecorderModel *)_instance).meterTable = [[YPMeterTable alloc] init];
         
     });
     return _instance;
@@ -56,14 +65,31 @@ static id _instance;
  NSContactsUsageDescription:通信录
  NSPhotoLibraryUsageDescription:相册
  */
-
 - (void)createAudioSession {
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     if (![session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
         DLog(@"创建音频录制的音频会话error is %@",[error localizedDescription]);
     }
-    if (![session setActive:YES error:&error]) {
+    
+    /** ！！！此时播放录音时，总会出现一个问题，就是无法在扬声器中播放！！！！
+        导致录制出来的声音在播放的时候，听筒播放，声音非常小，所以在配置音频会话时
+     需要处理一下
+     */
+    UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+    /** 'AudioSessionSetProperty' is deprecated: first deprecated in iOS        7.0 - no longer supported
+    下面这个方法在iOS7.0之后就不在支持使用了...
+     */
+//    AudioSessionSetProperty (
+//                             kAudioSessionProperty_OverrideAudioRoute,
+//                             sizeof (audioRouteOverride),
+//                             &audioRouteOverride
+//                             );
+    [session setPreferredIOBufferDuration:audioRouteOverride error:&error];
+    
+    if(session == nil)
+        NSLog(@"Error creating session: %@", [error localizedDescription]);
+    else if (![session setActive:YES error:&error]) {
         DLog(@"激活音频录制的音频回话error is %@",[error localizedDescription]);
     }
     
@@ -145,6 +171,11 @@ static id _instance;
          */
         recorder.delegate = self;
         
+        /** -meteringEnabled: 是否支持对音频进行测量
+         
+         */
+        recorder.meteringEnabled = YES;
+        
         /** prepareToRecord:
          为了成功创建AVRecorder实例，建议调用其prepareToRecord方法。与AVPlayer的
          prepareToPlay方法类似，该方法执行底层Audio Queue初始化的必要过程。该方法还
@@ -159,6 +190,54 @@ static id _instance;
     
     return nil;
 }
+
+#pragma mark -
+#pragma mark - levels
+/** levels
+ 录音器的updateMeters方法一定要正好在读取当前等级值之前调用，以保证读取的级别是最新的
+之后向通道0请求平均值和峰值数据。通道都是0索引的，由于我们使用单声道录制，只需要询问第一
+个声道即可。
+ 
+ 之后在计量表格中查询线性声音的强度值并最终创建一个新的YPLevelPair实例，这个类只是用来
+保存返回的平均值和峰值数据。
+ 读取音频强度值与请求当前时间类似，当需要最新值时都需要轮询录音器。与请求当前时间一样，
+客户端代码可能使用NSTimer。不过由于你希望频繁更新用于展示的计量值以保持动画效果，需要
+更平滑的效果，所以可能改用CADisplayLink作为解决方案更合适
+CADisplayLink与NSTimer类似，不过它可以与显示频率自动同步。
+ */
+
+/** 因这块属于需求扩展化的要求，在这举个例子来说明一下就行了...
+在需要展示数据的VC中开启CADisplayLink计时
+ - (void)startMeterTimer {
+    [self.leveTimer invalidate];
+    self.levelTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeter)];
+    self.levelTimer.frameInterval = 4;//屏幕刷新频率的1/4足矣
+    [self.levelTimer addRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+ }
+ 
+ - (void)stopMeterTimer {
+    [self.levelTimer invalidate];
+    self.levelTimer = nil;
+    [self.levelMeterView resetLevelMeter];
+ }
+ 
+ - (void)updateMeter {
+    YPLevelPair *levels = [self.audioRecorderModel levels];
+    self.levelMeterView.level = levels.level;
+    self.levelMeterView.peakLevel = levels.peakLevel;
+    [self.levelMeterView setNeedsDisplay];
+ }
+ 
+ */
+- (YPLevelPair *)levels {
+    [self.recorder updateMeters];
+    float avgPower = [self.recorder averagePowerForChannel:0];
+    float peakPower = [self.recorder peakPowerForChannel:0];
+    float linearLevel = [self.meterTable valueForPower:avgPower];
+    float linearPeak = [self.meterTable valueForPower:peakPower];
+    return [YPLevelPair  levelsWithLevel:linearLevel peakLevel:linearPeak];
+}
+
 
 #pragma mark -
 #pragma mark - record 录音
@@ -194,6 +273,9 @@ static id _instance;
  
  */
 - (void)stopWithCompletionHandler:(recordingStopCompletionHandler)handler {
+    if (!self.recorder.currentTime) {//压根就没有开始录的话...返回，细节处理根据需求而定...
+        return;
+    }
     self.stopCompletionHandler = handler;
     [self.recorder stop];
 }
@@ -215,12 +297,9 @@ static id _instance;
     NSString *docsDir = [self documentsDirectory];
     NSString *destPath = [docsDir stringByAppendingString:fileName];
     NSURL *srcURL = [NSURL fileURLWithPath:self.recorder.url.path];
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isExist = [fileManager fileExistsAtPath:srcURL.path];
     if (isExist) {
-        
-        
         NSData *mydata = [NSData dataWithContentsOfFile:srcURL.path];
         BOOL isSaved = [mydata writeToFile:destPath atomically:NO];
         if (isSaved) {
@@ -229,19 +308,22 @@ static id _instance;
         }else {
             handler(NO,@[@"error",@""]);
         }
-        
-//        NSURL *destURL = [NSURL fileURLWithPath:destPath];
-//        NSError *error;
-//        BOOL success = [fileManager copyItemAtURL:srcURL toURL:destURL error:&error];
-//        if (success) {
-//            handler(YES,@[name,destURL]);
-//            [self.recorder prepareToRecord];
-//        }else {
-//            handler(NO,error);
-//        }
+        /*
+        NSURL *destURL = [NSURL fileURLWithPath:destPath];
+        NSError *error;
+        BOOL success = [fileManager copyItemAtURL:srcURL toURL:destURL error:&error];
+        if (success) {
+            handler(YES,@[name,destURL]);
+            [self.recorder prepareToRecord];
+        }else {
+            handler(NO,error);
+        }
+        */
     }
 }
 
+#pragma mark -
+#pragma mark - documentsDirectory  得到Document文件路径
 - (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [paths lastObject];
@@ -254,6 +336,7 @@ static id _instance;
     [self.player stop];
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:model.url error:nil];
     if (self.player) {
+        self.player.volume = 1.0;
         [self.player play];
         return YES;
     }
@@ -261,6 +344,22 @@ static id _instance;
     return NO;
 }
 
+#pragma mark -
+#pragma mark - formatCurrentTime
+/** 展示播放时间
+ AVAudioRecorder具有的currentTime 属性，可以为用户提供时间反馈信息。
+ 该属性返回一个NSTimeinterval，用于指示从录制开始到现在的时间，以秒来
+ 计算。NSTimeinterval不适合在用户界面上显示，处理一下时间
+ */
+- (NSString *)formatCurrentTime {
+    NSUInteger time = (NSUInteger)self.recorder.currentTime;
+    NSUInteger hours = time / 3600;
+    NSUInteger minutes = (time / 60) % 60;
+    NSUInteger seconds = time % 60;
+    NSString *format = @"%02i:%02i:%02i";
+    
+    return [NSString stringWithFormat:format,hours,minutes,seconds];
+}
 
 #pragma mark -
 #pragma mark - canRecord 是否允许了录音的权限
@@ -269,7 +368,6 @@ static id _instance;
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
-        
         [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
             if (isAllow) {
                 isAllow(granted);
@@ -285,9 +383,12 @@ static id _instance;
 @implementation YPMemoAudiosModel
 
 //在保存完录音成功后，调用该方法记录下录音名字和保存的地址url
-- (void)memoWithName:(NSString *)name url:(NSURL *)url {
-    self.name = name;
-    self.url = url;
++ (YPMemoAudiosModel *)memoWithName:(NSString *)name url:(NSURL *)url {
+    YPMemoAudiosModel *memoAudiosModle = [YPMemoAudiosModel new];
+    memoAudiosModle.name = name;
+    memoAudiosModle.url = url;
+    return memoAudiosModle;
 }
+
 
 @end

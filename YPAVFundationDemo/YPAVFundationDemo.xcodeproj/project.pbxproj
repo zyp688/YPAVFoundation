@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2613E994219011D200304E3E /* YPMeterTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 2613E993219011D100304E3E /* YPMeterTable.m */; };
 		266B3A3321894A09001AA0D9 /* shamoluotuo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */; };
 		266B3A3621894A31001AA0D9 /* YPAudioPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */; };
 		267010E3218AF4C700E96048 /* YPAVAudioRecorderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 267010E1218AF4C700E96048 /* YPAVAudioRecorderVC.m */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2613E992219011D100304E3E /* YPMeterTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPMeterTable.h; sourceTree = "<group>"; };
+		2613E993219011D100304E3E /* YPMeterTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPMeterTable.m; sourceTree = "<group>"; };
 		266B3A3221894A09001AA0D9 /* shamoluotuo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shamoluotuo.mp3; sourceTree = "<group>"; };
 		266B3A3421894A31001AA0D9 /* YPAudioPlayerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YPAudioPlayerModel.h; sourceTree = "<group>"; };
 		266B3A3521894A31001AA0D9 /* YPAudioPlayerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YPAudioPlayerModel.m; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 			children = (
 				267010E5218AFD4800E96048 /* YPAudioRecorderModel.h */,
 				267010E6218AFD4800E96048 /* YPAudioRecorderModel.m */,
+				2613E992219011D100304E3E /* YPMeterTable.h */,
+				2613E993219011D100304E3E /* YPMeterTable.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				2685570C2186E1BC00114905 /* main.m in Sources */,
 				268557392186F4D700114905 /* YPBaseVC.m in Sources */,
 				268556FE2186E1BB00114905 /* AppDelegate.m in Sources */,
+				2613E994219011D200304E3E /* YPMeterTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
